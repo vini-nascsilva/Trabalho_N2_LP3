@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<HTML lang="pt-br">
+
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- A biblioteca bundle já contem os arquivos JS do Bootstrap, Popper, e jQuery.
+    <script src="js/bootstrap.bundle.js"></script>-->
+    <title>FTT EC LP2 N1!!</title>
+    <LINK REL="stylesheet" HREF="css/bootstrap.css" />
+    <STYLE>
+        .center-txt {
+            text-align: center;
+            color: black;
+            width: 90px;
+            padding: 4px;
+            margin:0;
+            border:0;
+        }
+        .button-selected {
+            background-color: #343a40;
+            color: white;
+            border-radius: 15px;
+        }       
+        .width-button-bar {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 0;
+            margin-left: 0;
+            
+        }
+        .bottom-button-bar {
+            margin:0;
+            padding:0;
+            border:0;
+            width: 100%;
+        }
+        .icon-font {
+            font-size: 40px;   
+        }
+        main {
+            padding-top: 56px;
+            padding-bottom: 50px;
+        }
+		
+		body {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-shadow: .1em .1em 0 rgba(0,0,0,0.3);
+		font-size: 1.3em;
+		height: 100vh;
+		background-image: linear-gradient(to right top, #99bbcb, #a5c7d7, #b1d4e2, #bde0ee, #c9edfa);
+		}
+		
+		h1 {
+		margin: 0 auto;
+		font-size: 2.2em;
+		text-align: center;
+		color: #fff;
+		font-size: 5em;
+		}	
+		h2 {
+		margin: 0 auto;
+		font-size: 2.2em;
+		text-align: center;
+		color: #fff;
+		font-size: 3em;
+		}
+		body.sunny {
+			background-image: linear-gradient(to right top, #ff4e50, #ff713e, #ff932b, #ffb41d, #f9d423);
+		}
+		body.cloudy {
+			background-image: linear-gradient(to right top, #63747c, #71858e, #7f96a0, #8da8b2, #9bbac5);
+		}
+		body.rainy {
+			background-image: linear-gradient(to right top, #637c7b, #718e8c, #7ea09e, #8db2b0, #9bc5c3);
+		}
+		
+		.grid-2 {
+		  display: grid;
+		  grid-gap: 20px;
+		  grid-template-columns: repeat(2, 1fr);
+		}
+
+		.grid-3 {
+		  display: grid;
+		  grid-gap: 20px;
+		  grid-template-columns: repeat(3, 1fr);
+		}
+
+		.center {
+		  text-align: center;
+		  margin: auto;
+		}
+
+		.bg-light {
+		  background: #f4f4f4;
+		  color: #333;
+		}
+
+		.bg-dark {
+		  background: #333;
+		  color: #f4f4f4;
+		}
+		
+	    services div {
+	    background: #333;
+		border-bottom: #333 dashed 1px;
+		padding: 1.2rem 1rem;
+			
+		}
+    </STYLE>
+    <SCRIPT>
+
+		const key = 'fca22a79ea650936996201ce831d8bf8';
+		if(key=='') document.getElementById('temp').innerHTML = ('fca22a79ea650936996201ce831d8bf8');
+
+		function weatherBallon( cityID ) {
+			fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID+ '&appid=' + key)  
+			.then(function(resp) { return resp.json() }) // Convert data to json
+			.then(function(data) {
+				drawWeather(data);
+			})
+			.catch(function() {
+				// catch any errors
+			});
+		}
+		function drawWeather( d ) {
+		  var celcius = Math.round(parseFloat(d.main.temp)-273.15);
+		  var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
+		  var description = d.weather[0].description; 
+			
+			document.getElementById('description').innerHTML = description;
+			document.getElementById('temp').innerHTML = celcius + '&deg;';
+			document.getElementById('location').innerHTML = d.name;
+			document.getElementById('timezone').innerHTML = d.timezone;
+			document.getElementById('humidity').innerHTML = d.main.humidity;
+			document.getElementById('temp_min').innerHTML = d.main.temp_min;
+			document.getElementById('temp_max').innerHTML = d.main.temp_max;
+		  
+		  if( description.indexOf('rain') > 0 ) {
+			document.body.className = 'rainy';
+		  } else if( description.indexOf('cloud') > 0 ) {
+			document.body.className = 'cloudy';
+		  } else if( description.indexOf('sunny') > 0 ) {
+			document.body.className = 'sunny';
+		  } else {
+			document.body.className = 'clear';
+		  }
+		}
+		window.onload = function() {
+			weatherBallon( 3449344 );
+		}
+
+    </SCRIPT>
+</HEAD>
+
+<BODY lang="pt-br">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="#">&#x1F981; FTT EC LP2 N1!!!</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Splash</a>
+                <a class="nav-item nav-link" href="http://www.fundacaosalvadorarena.org.br/" target="newpage">CEFSA</a>
+                <a class="nav-item nav-link" href="about.html">Sobre</a>
+            </div>
+        </div>
+    </nav>
+		
+		<ul>
+		<li class="container" id="aluno">
+			<h1><span class="badge badge-success">Projeto do Vinicius Nascimento RA: 082160004</span></h1>  
+		</li>
+
+		<li> 
+			<section class="services">
+				 <div class="container grid-3 center">
+					<div> <p id="description"></p>
+					<p><h2 id="temp"></h2></p>
+					<p id="location"></p></div>
+					
+		            <div>Time Zone:<p id="timezone"></p>
+					Humidity (%): <p id="humidity"></p></div>
+
+		           <div>Temp. Min (kelvin):
+					<p id="temp_min"></p>
+				    Temp. Max (kelvin):
+					<p id="temp_max"></p></div>
+					
+				</div>
+			</section>
+		</li>
+	</ul>
+	
+    <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
+        <div class="row w-100 bottom-button-bar">
+            <div class="col-sm center-txt"><b onclick='window.location="tab01news.html"'>News<br><span class="icon-font">&#x1f4f0;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab02map.html"'>Map<br><span class="icon-font">&#x1f4cc;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab03todo.html"'>Todo<br><span class="icon-font">&#x1F4DD;</span></b>
+            </div>
+            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab04project.html"'>Trabalho Aluno<br><span class="icon-font">&#x1F981;</span></b>
+            </div>
+        </div>
+    </nav>
+</BODY>
+<!-- carga de scripts do Bootstrap, JQuery, Popper -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</HTML>
